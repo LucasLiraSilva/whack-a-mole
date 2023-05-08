@@ -1,0 +1,153 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root{
+  --moles-wid: clamp(13rem, 15vw, 22rem);
+  --moles-hei: clamp(11rem, 15vh, 16rem);
+
+  font-size: 62.5%;
+}
+
+.hide{
+  display: none;
+}
+
+.page{
+  background: url('./assets/fundo.svg');
+  background-position: top;
+  background-size: cover;
+  background-repeat: no-repeat;
+  
+  height: 100vh;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  
+  position: relative;
+}
+main{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  justify-items: center;
+  align-items: center;
+  gap: 3rem;
+}
+div.moles-hole{
+  background: url('./assets/toupeira6.svg');
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  
+  height: var(--moles-hei);
+  width: var(--moles-wid);
+
+  cursor: pointer;
+}
+div.moles-hole.number-1:hover{
+  animation: moles-appear 800ms ease forwards;
+}
+div.moles-hole.number-5:hover{
+  animation: moles-appear 800ms ease forwards;
+}
+div.moles-hole.number-7:hover{
+  animation: moles-appear 800ms ease forwards;
+}
+div.moles-hole.number-2{
+  animation: moles-appear 800ms ease forwards;
+}
+div.moles-hole.number-4{
+  animation: moles-appear 800ms ease forwards;
+}
+div.moles-hole.number-10{
+  animation: moles-appear 800ms ease forwards;
+}
+
+button{
+  padding: 1.5rem;
+  background-color: rgb(85, 65, 10);
+  border: none;
+  border-radius: 1rem;
+  font-weight: bold;
+  color: white;
+
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+
+  text-transform: uppercase;
+  transition: all .4s;
+
+  cursor: pointer;
+}
+button:hover{
+  transform: scale(1.1);
+}
+
+@media(min-width:1000px){
+  main{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@keyframes moles-appear{
+  0%{
+    background: url('./assets/toupeira1.svg');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    
+    height: var(--moles-hei);
+    width: var(--moles-wid);
+  }
+  16%{
+    background: url('./assets/toupeira2.svg');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    
+    height: var(--moles-hei);
+    width: var(--moles-wid);
+  }
+  32%{
+    background: url('./assets/toupeira3.svg');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    
+    height: var(--moles-hei);
+    width: var(--moles-wid);
+  }
+  50%{
+    background: url('./assets/toupeira4.svg');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    
+    height: var(--moles-hei);
+    width: var(--moles-wid);
+  }
+  75%{
+    background: url('./assets/toupeira5.svg');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    
+    height: var(--moles-hei);
+    width: var(--moles-wid);
+  }
+  100%{
+    background: url('./assets/toupeira6.svg');
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    
+    height: var(--moles-hei);
+    width: var(--moles-wid);
+  }
+}
+
