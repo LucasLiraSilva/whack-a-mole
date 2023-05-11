@@ -1,73 +1,67 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-:root{
-  --moles-wid: clamp(13rem, 15vw, 22rem);
-  --moles-hei: clamp(11rem, 15vh, 16rem);
+:root {
+  --moles-wid: clamp(8rem, 10vw, 22rem);
+  --moles-hei: clamp(10rem, 10vh, 16rem);
 
   font-size: 62.5%;
 }
-
-.hide{
+.hide {
   display: none;
 }
-
-.page{
-  background: url('./assets/fundo.svg');
+.page {
+  background: url("./src/assets/fundo.svg");
   background-position: top;
   background-size: cover;
   background-repeat: no-repeat;
-  
+
   height: 100vh;
-  
+
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
-  
   position: relative;
 }
-main{
+main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   justify-items: center;
   align-items: center;
-  gap: 3rem;
+  gap: clamp(1rem, 1vw, 3rem);
+
+  min-width: 20rem;
 }
-div.moles-hole{
-  background: url('./assets/toupeira6.svg');
+
+div.moles-hole {
+  background: url("./src/assets/toupeira6.svg");
   background-size: contain;
   background-position: bottom;
   background-repeat: no-repeat;
-  
+
   height: var(--moles-hei);
   width: var(--moles-wid);
 
   cursor: pointer;
 }
-div.moles-hole.number-1:hover{
-  animation: moles-appear 800ms ease forwards;
+div.moles-hole.animated {
+  animation: moles-appear 1s ease-in;
 }
-div.moles-hole.number-5:hover{
-  animation: moles-appear 800ms ease forwards;
-}
-div.moles-hole.number-7:hover{
-  animation: moles-appear 800ms ease forwards;
-}
-div.moles-hole.number-2{
-  animation: moles-appear 800ms ease forwards;
-}
-div.moles-hole.number-4{
-  animation: moles-appear 800ms ease forwards;
-}
-div.moles-hole.number-10{
-  animation: moles-appear 800ms ease forwards;
+div.moles-hole.catched {
+  background: url("./src/assets/toupeira3.svg");
+  background-size: contain;
+  background-position: bottom;
+  background-repeat: no-repeat;
+
+  height: var(--moles-hei);
+  width: var(--moles-wid);
 }
 
-button{
+button {
   padding: 1.5rem;
   background-color: rgb(85, 65, 10);
   border: none;
@@ -80,74 +74,72 @@ button{
   left: 2rem;
 
   text-transform: uppercase;
-  transition: all .4s;
+  transition: all 0.4s;
 
   cursor: pointer;
 }
-button:hover{
+button:hover {
   transform: scale(1.1);
 }
 
-@media(min-width:1000px){
-  main{
+@media (min-width: 1000px) {
+  main {
     grid-template-columns: repeat(4, 1fr);
   }
 }
+@keyframes moles-appear {
+  0% {
+    background: url("./src/assets/toupeira1.svg");
+    background-size: contain;
+    background-position: bottom;
+    background-repeat: no-repeat;
 
-@keyframes moles-appear{
-  0%{
-    background: url('./assets/toupeira1.svg');
-    background-size: contain;
-    background-position: bottom;
-    background-repeat: no-repeat;
-    
     height: var(--moles-hei);
     width: var(--moles-wid);
   }
-  16%{
-    background: url('./assets/toupeira2.svg');
+  16% {
+    background: url("./src/assets/toupeira2.svg");
     background-size: contain;
     background-position: bottom;
     background-repeat: no-repeat;
-    
+
     height: var(--moles-hei);
     width: var(--moles-wid);
   }
-  32%{
-    background: url('./assets/toupeira3.svg');
+  32% {
+    background: url("./src/assets/toupeira3.svg");
     background-size: contain;
     background-position: bottom;
     background-repeat: no-repeat;
-    
+
     height: var(--moles-hei);
     width: var(--moles-wid);
   }
-  50%{
-    background: url('./assets/toupeira4.svg');
+  50% {
+    background: url("./src/assets/toupeira4.svg");
     background-size: contain;
     background-position: bottom;
     background-repeat: no-repeat;
-    
+
     height: var(--moles-hei);
     width: var(--moles-wid);
   }
-  75%{
-    background: url('./assets/toupeira5.svg');
+  75% {
+    background: url("./src/assets/toupeira5.svg");
     background-size: contain;
     background-position: bottom;
     background-repeat: no-repeat;
-    
+
     height: var(--moles-hei);
     width: var(--moles-wid);
   }
-  100%{
-    background: url('./assets/toupeira6.svg');
+  100% {
+    background: url("./src/assets/toupeira6.svg");
     background-size: contain;
     background-position: bottom;
     background-repeat: no-repeat;
-    
+
     height: var(--moles-hei);
     width: var(--moles-wid);
   }
 }
-
