@@ -1,9 +1,17 @@
-const molesHole = document.querySelectorAll(".moles-hole");
-const btnPlay = document.querySelector(".play");
-const btnStop = document.querySelector(".stop");
-let timerInterval;
+import {  
+  molesHole,
+  btnPlay,
+  btnStop,
+} from './elements.js';
+import Controls from './controls.js';
 
-molesHole.item(0).classList.add("animated");
+let timerInterval
+const controls = Controls({
+  molesHole,
+  btnPlay,
+  btnStop,
+  molesAppear
+});
 
 //Functions
 function molesAppear() {
@@ -12,11 +20,11 @@ function molesAppear() {
 
   timerInterval = setInterval(() => {
     if (whackedMole === 0 && attempts >= 3) {
-      reset();
+      controls.reset(timerInterval);
       alert(`Que pena, não acertou. Tente de novo!`);
       return;
     } else if (attempts >= 3 && whackedMole <= 1) {
-      reset();
+      controls.reset(timerInterval);
       alert(`Que pena, acertou só ${whackedMole} toupeira. Tente de novo!`);
       return;
     };
@@ -38,44 +46,26 @@ function molesAppear() {
           whackedMole++;
         };
       });
+      verifyAttempts(whackedMole, attempts, timerInterval);
     };
 
-    verifyAttempts(whackedMole, attempts);
     whackAMole();
     attempts++;
   }, 2800);
 };
 
-function startGame() {
-  btnPlay.classList.add("hide");
-  btnStop.classList.remove("hide");
-  molesAppear();
-};
-function reset() {
-  btnPlay.classList.remove("hide");
-  btnStop.classList.add("hide");
-
-  clearInterval(timerInterval);
-
-  setTimeout(() => {
-    molesHole.forEach((mole) => {
-      mole.classList.remove("animated");
-      mole.classList.remove("catched");
-    });
-  }, 500);
-};
-function verifyAttempts(whackedMole, attempts) {
+function verifyAttempts(whackedMole, attempts, timerInterval) {
   if (whackedMole >= 2 && attempts >= 3) {
     alert(`Parabéns ! Acertou ${whackedMole} toupeiras.`);
-    reset();
+    controls.reset(timerInterval);
     return;
   };
 };
 
 //Events
 btnPlay.onclick = () => {
-  startGame();
+  controls.startGame();
 };
 btnStop.onclick = () => {
-  reset();
+  controls.reset(timerInterval);
 };
