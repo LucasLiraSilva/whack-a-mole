@@ -1,71 +1,65 @@
-import {  
-  molesHole,
-  btnPlay,
-  btnStop,
-} from './elements.js';
-import Controls from './controls.js';
-
-let timerInterval
+import { molesHole, btnPlay, btnStop } from "./elements.js";
+import Controls from "./controls.js";
 const controls = Controls({
   molesHole,
   btnPlay,
   btnStop,
   molesAppear
 });
-
-//Functions
-function molesAppear() {
-  let attempts = 0;
-  let whackedMole = 0;
-
-  timerInterval = setInterval(() => {
-    if (whackedMole === 0 && attempts >= 3) {
-      controls.reset(timerInterval);
-      alert(`Que pena, não acertou. Tente de novo!`);
-      return;
-    } else if (attempts >= 3 && whackedMole <= 1) {
-      controls.reset(timerInterval);
-      alert(`Que pena, acertou só ${whackedMole} toupeira. Tente de novo!`);
-      return;
-    };
-
-    const randomHole = Math.round(Math.random() * 11);
-    molesHole.item(`${randomHole}`).classList.add("animated");
-
-    function whackAMole() {
-      let containsAnimated = molesHole.item(`${randomHole}`).classList.contains("animated");
-      let timeOut = setTimeout(() => {
-        molesHole.item(`${randomHole}`).classList.remove("animated");
-        clearTimeout(timeOut);
-        containsAnimated = false;
-      }, 800);
-
-      molesHole.item(`${randomHole}`).addEventListener("click", () => {
-        if (containsAnimated) {
-          molesHole.item(`${randomHole}`).classList.add("catched");
-          whackedMole++;
-        };
-      });
-      verifyAttempts(whackedMole, attempts, timerInterval);
-    };
-
-    whackAMole();
-    attempts++;
-  }, 2800);
-};
-
-function verifyAttempts(whackedMole, attempts, timerInterval) {
-  if (whackedMole >= 2 && attempts >= 3) {
-    alert(`Parabéns ! Acertou ${whackedMole} toupeiras.`);
-    controls.reset(timerInterval);
-    return;
-  };
-};
+let timerInterval;
+let whackedMole = 0;
 
 //Events
-btnPlay.onclick = () => {
-  controls.startGame();
+btnPlay.onclick = () => controls.startGame();
+btnStop.onclick = () => controls.reset(timerInterval);
+
+//Functions
+const whackAMole = () => {
+  const randomHole = Math.round(Math.random() * 11);
+  let randomMole = molesHole.item(`${randomHole}`);
+
+  randomMole.classList.add("animated");
+
+  let containsAnimated = randomMole.classList.contains("animated");
+
+  let timeOut = setTimeout(() => {
+    randomMole.classList.remove("animated");
+    clearTimeout(timeOut);
+    containsAnimated = false;
+  }, 800);
+
+  randomMole.addEventListener("click", () => {
+    if (containsAnimated) {
+      randomMole.classList.add("catched");
+      whackedMole++;
+    }
+  });
 };
-btnStop.onclick = () => {
-  controls.reset(timerInterval);
+function molesAppear() {
+  let whackAttempts = 0;
+  timerInterval = setInterval(function () {
+    whackAMole();
+    playerWinOrLose(whackedMole, whackAttempts, timerInterval);
+    whackAttempts++;
+  }, 2800);
+}
+const playerWinOrLose = (nWhackedMoles, nWhackAttempts, timerInterval) => {
+  if (!nWhackedMoles && nWhackAttempts >= 3) {
+    controls.reset(timerInterval);
+    alert(`Que pena, você não acertou. Tente de novo!`);
+    whackedMole = 0;
+    return;
+  } else if (nWhackedMoles <= 1 && nWhackAttempts >= 3) {
+    controls.reset(timerInterval);
+    alert(
+      `Que pena, você acertou só ${nWhackedMoles} toupeira. Tente de novo!`
+    );
+    whackedMole = 0;
+    return;
+  } else if (nWhackedMoles >= 2 && nWhackAttempts >= 3) {
+    alert(`Parabéns ! Você acertou ${nWhackedMoles} toupeiras.`);
+    controls.reset(timerInterval);
+    whackedMole = 0;
+    return;
+  }
 };

@@ -1,32 +1,27 @@
-export default function Controls({
-  btnPlay,
-  btnStop,
-  molesAppear,
-  molesHole
-}){
-    function startGame() {
-      btnPlay.classList.add("hide");
-      btnStop.classList.remove("hide");
-      molesAppear();
-    };
-    function reset(timerInterval) {
-      btnPlay.classList.remove("hide");
-      btnStop.classList.add("hide");
-    
-      clearInterval(timerInterval)
+export default function Controls({ btnPlay, btnStop, molesAppear, molesHole }) {
+  function startGame() {
+    btnPlay.classList.add("hide");
+    btnStop.classList.remove("hide");
+    molesAppear();
+  }
+  function reset(timerInterval) {
+    btnPlay.classList.remove("hide");
+    btnStop.classList.add("hide");
 
-      setTimeout(() => {
-        molesHole.forEach((mole) => {
-          mole.classList.remove("animated");
-          mole.classList.remove("catched");
-        });
-      }, 500);
+    clearInterval(timerInterval);
 
-      return;
-    };
+    setTimeout(() => {
+      molesHole.forEach((mole) => {
+        mole.classList.remove("animated");
+        mole.classList.remove("catched");
+      });
+    }, 400);
 
-  return{
+    return;
+  }
+
+  return {
     startGame,
     reset
   };
-};
+}
